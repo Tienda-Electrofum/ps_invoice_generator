@@ -1,8 +1,6 @@
-use ps_invoice_generator::{system_utils::*, ps::client::Client};
+use ps_invoice_generator::{system_utils::*, ps::client::CustomerData};
 use base64::{engine::general_purpose, Engine as _};
 use reqwest;
-use serde::de::value;
-use serde_json::Value;
 
 #[tokio::main]
 async fn main() {
@@ -20,7 +18,7 @@ async fn main() {
 
     let body = result.text().await.unwrap();
 
-    let data: Value = serde_json::from_str(&body).unwrap();
+    let data: CustomerData = serde_json::from_str(&body).unwrap();
 
-    print!("{}", data)
+    println!("{:?}", data)
 }
