@@ -8,7 +8,6 @@ impl SystemUtils {
         let _ = match env::var_os("PS_API_URL") {
             Some(api_url_var) => {
                 api_url = String::from(api_url_var.to_str().unwrap());
-                println!("\"PS_API_URL\" is: {}", api_url);
             }
             None => {
                 println!("The variable \"PS_API_URL\"doesn't exist in the system");
@@ -19,7 +18,6 @@ impl SystemUtils {
         let _ = match env::var_os("PS_API_KEY") {
             Some(api_url_var) => {
                 api_key = String::from(api_url_var.to_str().unwrap());
-                println!("\"PS_API_URL\" is: {}", api_key);
             }
             None => {
                 println!("The variable \"PS_API_KEY\"doesn't exist in the system");

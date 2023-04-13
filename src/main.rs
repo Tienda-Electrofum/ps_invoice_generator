@@ -1,24 +1,16 @@
-use ps_invoice_generator::{system_utils::*, ps::client::CustomerData};
-use base64::{engine::general_purpose, Engine as _};
-use reqwest;
+use ps_invoice_generator::{
+    system_utils::*, 
+    request_manager::RequestManager
+};
 
 #[tokio::main]
 async fn main() {
     let (api_url, api_key) = SystemUtils::get_environment_variables();
+    let request_manager = RequestManager::new(api_url,api_key);
+    let data = request_manager.get_customer("2".to_string()).await;
+    let invoice = request_manager.get_order_invoice("1".to_string()).await;
 
-    let api_key_base64 = general_purpose::STANDARD_NO_PAD.encode(format!("{}:", api_key));
-
-    let client = reqwest::Client::new();
-    let result = client
-        .get("https://www.electrofum.com/tienda22/api/customers/1/?output_format=JSON")
-        .header("Authorization", format!("Basic {}", api_key_base64))
-        .send()
-        .await
-        .unwrap();
-
-    let body = result.text().await.unwrap();
-
-    let data: CustomerData = serde_json::from_str(&body).unwrap();
-
-    println!("{:?}", data)
+    println!("{:?}",data);
+    println!("{:?}", invoice);
+    request_manager.test_parse();
 }
