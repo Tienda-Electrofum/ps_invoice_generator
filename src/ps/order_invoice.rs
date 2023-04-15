@@ -1,12 +1,12 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct OrderInvoiceData{
+pub struct OrderInvoiceData {
     pub order_invoice: OrderInvoice,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct OrderInvoice{
+pub struct OrderInvoice {
     pub id: usize,
     pub id_order: String,
     pub number: String,
@@ -23,15 +23,15 @@ pub struct OrderInvoice{
     pub shipping_tax_computation_method: String,
     pub total_wrapping_tax_excl: String,
     pub total_wrapping_tax_incl: String,
-    pub date_add: String
+    pub date_add: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct OrderInvoices{
-    pub order_invoices: Vec<OrderInvoiceId>
+pub struct OrderInvoices {
+    pub order_invoices: Vec<OrderInvoiceId>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct OrderInvoiceId{
-    pub id: usize
+pub struct OrderInvoiceId {
+    pub id: usize,
 }

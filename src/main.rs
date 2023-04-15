@@ -1,16 +1,11 @@
 use ps_invoice_generator::{
-    system_utils::*, 
-    request_manager::RequestManager
+    pdf_generator::PdfGenerator, request_manager::RequestManager, system_utils::*,
 };
 
 #[tokio::main]
 async fn main() {
     let (api_url, api_key) = SystemUtils::get_environment_variables();
-    let request_manager = RequestManager::new(api_url,api_key);
-    let data = request_manager.get_customer("2".to_string()).await;
-    let invoice = request_manager.get_order_invoice("1".to_string()).await;
-
-    println!("{:?}",data);
-    println!("{:?}", invoice);
-    request_manager.test_parse();
+    let request_manager = RequestManager::new(api_url, api_key);
+    //request_manager.get_order_invoices().await;
+    PdfGenerator::generate_pdf_test();
 }

@@ -1,8 +1,8 @@
 use std::env;
-pub struct SystemUtils{}
+pub struct SystemUtils {}
 
 impl SystemUtils {
-    pub fn get_environment_variables() -> (String, String){
+    pub fn get_environment_variables() -> (String, String) {
         let api_url;
         let api_key;
         let _ = match env::var_os("PS_API_URL") {
@@ -14,7 +14,7 @@ impl SystemUtils {
                 std::process::exit(0);
             }
         };
-    
+
         let _ = match env::var_os("PS_API_KEY") {
             Some(api_url_var) => {
                 api_key = String::from(api_url_var.to_str().unwrap());
